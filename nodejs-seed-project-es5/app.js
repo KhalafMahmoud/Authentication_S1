@@ -1,3 +1,4 @@
+
 require('./api/config/DBConnection');
 var express = require('express'),
   logger = require('morgan'),
@@ -7,6 +8,8 @@ var express = require('express'),
   bodyParser = require('body-parser'),
   routes = require('./api/routes'),
   config = require('./api/config/Config'),
+  passport = require('passport'),
+  users = require('./api/routes/index');
   app = express();
 
 app.set('secret', config.SECRET);
@@ -16,7 +19,7 @@ app.use(
   cors({
     origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'DELETE']
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'] 
   })
 );
 app.use(helmet());
@@ -27,6 +30,18 @@ app.use(
     extended: false
   })
 );
+app.use(cors());
+app.use(bodyParser.json());
+app.listen(port, () => {
+  console.log('server started on port' + port);
+})
+
+//password middleware
+app.use(passport.initialize());
+app.use(passport.session);
+
+require('./api/config/passport')(passport);
+
 app.use('/api', routes);
 
 // 500 internal server error handler
