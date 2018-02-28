@@ -42,7 +42,7 @@ const NB_MODULES = [
   NbSidebarModule,
   NbCheckboxModule,
   NgbModule,
-  Ng2SmartTableModule
+  Ng2SmartTableModule,
 ];
 
 const COMPONENTS = [
