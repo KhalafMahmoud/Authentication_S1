@@ -9,9 +9,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { ParentComponent } from './parent/parent.component';
+import { AuthComponent } from './auth/auth.component';
+import { AuthParentComponent } from './auth-parent/auth-parent.component';
+import { AuthGuard } from './@guards/auth.guard';
 
 @NgModule({
-  declarations: [AppComponent, ParentComponent],
+  declarations: [AppComponent, ParentComponent, AuthParentComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -20,6 +23,6 @@ import { ParentComponent } from './parent/parent.component';
     AppRoutingModule
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/',}]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/',},AuthGuard]
 })
 export class AppModule {}
